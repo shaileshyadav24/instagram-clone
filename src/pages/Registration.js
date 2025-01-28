@@ -3,8 +3,8 @@ import "../css/Registration.css";
 
 // Importing necessary modules from React and other libraries
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { makeRegisterRequest } from "../services/AuthService";
 
 // Defining the Registration component
 const Registration = () => {
@@ -79,7 +79,7 @@ const Registration = () => {
 
     try {
       // Send POST request to register the user
-      const response = await axios.post('/api/auth/register', formData);
+      const response = await makeRegisterRequest(formData);
 
       // Set success message and clear error message
       setMessage(response.data.message);

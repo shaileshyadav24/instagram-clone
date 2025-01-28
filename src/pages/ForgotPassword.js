@@ -4,8 +4,7 @@ import "../css/ForgotPassword.css";
 // Importing React and necessary hooks from 'react'
 import React, { useState } from 'react';
 
-// Importing axios for making HTTP requests
-import axios from 'axios';
+import { makeForgotPasswordRequest } from '../services/AuthService';
 
 // Importing hook from 'react-router-dom' for navigation
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +47,7 @@ const ForgotPassword = () => {
 
     try {
       // Make a POST request to request a password reset
-      const response = await axios.post('/api/auth/forgot-password', { email });
+      const response = await makeForgotPasswordRequest(email);
 
       // Update the success message state
       setMessage(response.data.message);

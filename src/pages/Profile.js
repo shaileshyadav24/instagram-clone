@@ -1,7 +1,8 @@
 import "../css/Profile.css";
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { validateUserToken } from '../services/AuthService';
+import { saveUserProfile } from '../services/ProfileService';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -22,11 +23,7 @@ const Profile = () => {
           return;
         }
 
-        const response = await axios.get('/api/auth/user', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await validateUserToken(token);
         setUser(response.data);
         setName(response.data.name);
         setEmail(response.data.email);
@@ -47,15 +44,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(
-        '/api/auth/update-profile',
-        { name, email, profilePicture },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await saveUserProfile(token, { name, email, profilePicture });
       setUser(response.data);
       setIsEditing(false);
       setError('');

@@ -5,7 +5,7 @@ import "../css/ResetPassword.css";
 import React, { useState } from 'react';
 
 // Importing axios for making HTTP requests
-import axios from 'axios';
+import { makeResetPasswordRequest } from "../services/AuthService";
 
 // Importing hooks from 'react-router-dom' for navigation and accessing URL parameters
 import { useNavigate, useParams } from 'react-router-dom';
@@ -57,10 +57,7 @@ const ResetPassword = () => {
 
     try {
       // Make a POST request to reset the password
-      const response = await axios.post('/api/auth/reset-password', {
-        token, // Include the reset token
-        password, // Include the new password
-      });
+      const response = await makeResetPasswordRequest(token, password);
 
       // Update the success message state
       setMessage(response.data.message);
