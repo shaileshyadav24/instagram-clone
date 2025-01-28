@@ -1,11 +1,10 @@
-export const API_BASE_URL = 'http://localhost:1111/api';
+export const API_BASE_URL = '/api';
 
 export const AUTH = {
   LOGIN: `${API_BASE_URL}/auth/login`,
   REGISTER: `${API_BASE_URL}/auth/register`,
   FORGOT_PASSWORD: `${API_BASE_URL}/auth/forgot-password`,
   RESET_PASSWORD: `${API_BASE_URL}/auth/reset-password`,
-  UPDATE_PROFILE: `${API_BASE_URL}/auth/update-profile`,
 };
 
 export const USER = {
